@@ -1,31 +1,46 @@
-import { BrowserRouter as Router, Routes, Route, NavLink } from 'react-router-dom'
-import logo from '../logo.svg'
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  NavLink,
+  Navigate,
+} from "react-router-dom";
+import logo from "../logo.svg";
+import { routes } from "./routes";
+import { Suspense } from "react";
 
 export const Navigation = () => {
   return (
-    <Router>
-      <div className="main-layout">
-        <nav>
-          <img src={logo} alt="React Logo" />
-          <ul>
-            <li>
-              <NavLink to="/" className={({ isActive }) => isActive ? 'nav-active' : ''}>Home</NavLink>
-            </li>
-            <li>
-              <NavLink to="/about" className={({ isActive }) => isActive ? 'nav-active' : ''}>About</NavLink>
-            </li>
-            <li>
-              <NavLink to="/users" className={({ isActive }) => isActive ? 'nav-active' : ''}>Users</NavLink>
-            </li>
-          </ul>
-        </nav>
+    <Suspense fallback={<div></div>}>
+      <Router>
+        <div className="main-layout">
+          <nav>
+            <img src={logo} alt="React Logo" />
+            <ul>
+              {routes.map((e) => (
+                <li key={e.path}>
+                  <NavLink
+                    to={e.to}
+                    className={({ isActive }) => (isActive ? "nav-active" : "")}
+                  >
+                    {e.name}
+                  </NavLink>
+                </li>
+              ))}
+            </ul>
+          </nav>
 
-        <Routes>
-          <Route path="/about" element={<h1>About</h1>} />
-          <Route path="/users" element={<h1>Users</h1>} />
-          <Route path="/" element={<h1>Home</h1>} />
-        </Routes>
-      </div>
-    </Router>
-  )
-}
+          <Routes>
+            {routes.map((e) => (
+              <Route path={e.path} element={<e.Element />} key={e.to}></Route>
+            ))}
+            <Route
+              path="/*"
+              element={<Navigate to={routes[0].to} replace={true} />}
+            ></Route>
+          </Routes>
+        </div>
+      </Router>
+    </Suspense>
+  );
+};

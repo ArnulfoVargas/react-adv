@@ -1,54 +1,52 @@
 import { lazy, LazyExoticComponent } from "react";
 import { JSX } from "react/jsx-dev-runtime";
-import { LazyPage1, LazyPage2, LazyPage3 } from "../01-lazyload/pages";
+import { NoLazy } from "../01-lazyload/pages/NoLazy";
+// import { LazyPage1, LazyPage2, LazyPage3 } from "../01-lazyload/pages";
 
-const lazy1 = lazy(
+// const lazy1 = lazy(
+//   () =>
+//     import(
+//       /* webpackChunkName: "LazyPage1" */ "../01-lazyload/pages/LazyPage1"
+//     ),
+// );
+// const lazy2 = lazy(
+//   () =>
+//     import(
+//       /* webpackChunkName: "LazyPage2" */ "../01-lazyload/pages/LazyPage2"
+//     ),
+// );
+// const lazy3 = lazy(
+//   () =>
+//     import(
+//       /* webpackChunkName: "LazyPage3" */ "../01-lazyload/pages/LazyPage3"
+//     ),
+// );
+const lazyLayout = lazy(
   () =>
     import(
-      /* webpackChunkName: "LazyPage1" */ "../01-lazyload/pages/LazyPage1"
-    ),
-);
-const lazy2 = lazy(
-  () =>
-    import(
-      /* webpackChunkName: "LazyPage2" */ "../01-lazyload/pages/LazyPage2"
-    ),
-);
-const lazy3 = lazy(
-  () =>
-    import(
-      /* webpackChunkName: "LazyPage3" */ "../01-lazyload/pages/LazyPage3"
+      /* webpackChunkName: "LazyLayout" */ "../01-lazyload/layout/LazyLayout"
     ),
 );
 
-export const routes: Route[] = [
+export const routes: ObjectRoute[] = [
   {
-    to: "/lazy1",
-    path: "lazy1",
-    name: "Lazy 1",
-    Element: lazy1,
-    // Element: LazyPage1,
+    Element: lazyLayout,
+    name: "Lazy home",
+    path: "/lazy/*",
+    to: "/lazy/",
   },
   {
-    to: "/lazy2",
-    path: "lazy2",
-    name: "Lazy 2",
-    Element: lazy2,
-    // Element: LazyPage2,
-  },
-  {
-    to: "/lazy3",
-    path: "lazy3",
-    name: "Lazy 3",
-    Element: lazy3,
-    // Element: LazyPage3,
+    Element: NoLazy,
+    name: "No Lazy",
+    path: "/",
+    to: "/",
   },
 ];
 
 type JSXElement = () => JSX.Element;
 type Element = JSXElement | LazyExoticComponent<JSXElement>;
 
-interface Route {
+export interface ObjectRoute {
   to: string;
   path: string;
   name: string;

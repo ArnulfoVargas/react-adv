@@ -1,4 +1,6 @@
-import { ReactElement } from "react";
+import { ComponentProps, ReactElement } from "react";
+import { ProductCard } from "../components/ProductCard";
+import { ProductButtons, ProductImage, ProductTitle } from "../components";
 
 export interface Product {
   id: string;
@@ -12,14 +14,11 @@ export interface ProductContextProps {
   product: Product;
 }
 
-export interface ProductCardProps {
-  children?: ReactElement | ReactElement[];
-  product: Product;
-}
-
 export interface ProductCardHOCProps {
-  (p: ProductCardProps): ReactElement;
-  Title: (p: { title?: string }) => ReactElement;
-  Image: (p: { img?: string }) => ReactElement;
-  Buttons: () => ReactElement;
+  (p: ComponentProps<typeof ProductCard>): ReactElement;
+  // TS native
+  Title: (p: Parameters<typeof ProductTitle>[0]) => ReactElement;
+  // React alternative
+  Image: (p: ComponentProps<typeof ProductImage>) => ReactElement;
+  Buttons: (p: ComponentProps<typeof ProductButtons>) => ReactElement;
 }

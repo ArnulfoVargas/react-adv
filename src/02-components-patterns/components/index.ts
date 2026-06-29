@@ -9,7 +9,7 @@ import { ProductButtons } from "./ProductCard.Buttons";
 import { ProductImage } from "./ProductCard.Image";
 import { ProductTitle } from "./ProductCard.Title";
 
-export const ProductCard : ProductCardHOCProps = Object.assign(ProductCardHOC, {
+export const ProductCard: ProductCardHOCProps = Object.assign(ProductCardHOC, {
   Title: ProductTitle,
   Image: ProductImage,
   Buttons: ProductButtons,

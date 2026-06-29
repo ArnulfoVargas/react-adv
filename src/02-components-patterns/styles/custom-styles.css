@@ -1,0 +1,39 @@
+.bg-dark {
+  background-color: rgb(56, 56, 56);
+}
+
+.text-white {
+  color: white;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.custom-image {
+  margin: 15px;
+  border-radius: 10px;
+  width: calc(100% - 30px);
+  box-shadow: 1px 2px 10px #787878;
+}
+
+.custom-buttons {
+  color: white;
+  font-weight: bold;
+
+  div {
+    background-color: red;
+  }
+
+  button {
+    color: white;
+  }
+
+  button:nth-child(1) {
+    background-color: green;
+  }
+
+  button:nth-child(3) {
+    background-color: brown;
+  }
+}
